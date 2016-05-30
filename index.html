@@ -6,8 +6,23 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js"></script>
 	
 	<style type="text/css">
-		.colorBox {
+		.blueBox {
 			background-color: blue;
+			height: 200px;
+			width: 200px;
+		}
+		.yellowBox {
+			background-color: yellow;
+			height: 200px;
+			width: 200px;
+		}
+		.redBox {
+			background-color: red;
+			height: 200px;
+			width: 200px;
+		}
+		.greenBox {
+			background-color: green;
 			height: 200px;
 			width: 200px;
 		}
@@ -16,15 +31,57 @@
 <body>
  <div id="root"></div>
  <script type="text/babel">
- 	var Box = React.createClass ({
+ 	var RedBox = React.createClass({
+ 		update: function(){
+ 			this.props.update();
+ 		
+ 		},
+		render: function(){
+			return (
+				<div className='redBox' onClick={this.update}></div>
+				);
+		}
+ 	});
+ 	var BlueBox = React.createClass ({
+ 		update: function(){
+ 			
+ 			this.props.update();
+ 			
+ 		},
  		render: function(){
  			return (
- 				<div className="colorBox"></div>
+ 				<div className="blueBox"  onClick={this.update}></div>
  				)
  		}
  	});
+ 		var Main = React.createClass({
+ 			getInitialState: function(){
+ 				return {
+ 					colorIndex: 0,
+
+ 					color: [<BlueBox update={this.update}/>,<RedBox update={this.update}/>]};
+ 			},
+ 			update: function(){
+ 				if(this.state.colorIndex <1) {
+ 					this.setState(
+ 						{colorIndex: this.state.colorIndex + 1}
+ 						); 
+ 				}
+ 					else {
+
+ 						this.setState({colorIndex: 0})
+ 					}
+ 				
+ 			},
+			render: function(){
+				var box = this.state.color[this.state.colorIndex];
+				return (
+					<div>{box}</div>
+					);
+			}
+ 		});
  
- 	ReactDOM.render(<Box />, document.getElementById('root'));
+ 	ReactDOM.render(<Main/>, document.getElementById('root'));
 
 
  </script>
