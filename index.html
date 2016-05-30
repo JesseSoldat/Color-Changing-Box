@@ -26,6 +26,11 @@
 			height: 200px;
 			width: 200px;
 		}
+		.pinkBox {
+			background-color: pink;
+			height: 200px;
+			width: 200px;
+		}
 	</style>
 </head>
 <body>
@@ -39,6 +44,39 @@
 		render: function(){
 			return (
 				<div className='redBox' onClick={this.update}></div>
+				);
+		}
+ 	});
+ 	var PinkBox = React.createClass({
+ 		update: function(){
+ 			this.props.update();
+ 		
+ 		},
+		render: function(){
+			return (
+				<div className='pinkBox' onClick={this.update}></div>
+				);
+		}
+ 	});
+ 	 	var YellowBox = React.createClass({
+ 		update: function(){
+ 			this.props.update();
+ 		
+ 		},
+		render: function(){
+			return (
+				<div className='yellowBox' onClick={this.update}></div>
+				);
+		}
+ 	});
+ 	 	var GreenBox = React.createClass({
+ 		update: function(){
+ 			this.props.update();
+ 		
+ 		},
+		render: function(){
+			return (
+				<div className='greenBox' onClick={this.update}></div>
 				);
 		}
  	});
@@ -59,10 +97,17 @@
  				return {
  					colorIndex: 0,
 
- 					color: [<BlueBox update={this.update}/>,<RedBox update={this.update}/>]};
+ 					color: [
+ 					<BlueBox update={this.update}/>,
+ 					<RedBox update={this.update}/>,
+ 					<GreenBox update={this.update}/>,
+ 					<YellowBox update={this.update}/>,
+ 					<PinkBox update={this.update}/>
+
+ 					]};
  			},
  			update: function(){
- 				if(this.state.colorIndex <1) {
+ 				if(this.state.colorIndex <4) {
  					this.setState(
  						{colorIndex: this.state.colorIndex + 1}
  						); 
